@@ -150,12 +150,18 @@
         }
 
         const populateReportSummary = (results) => {
+            const { totalPixels, totalDiffPixels, sampleSize } = results;
 
+            const docSampleSize = document.querySelector("#sampleSize");
+            docSampleSize.innerHTML = sampleSize;
+            const docPercentageDiffPixels = document.querySelector("#percentageDiffPixels");
+            docPercentageDiffPixels.innerHTML = (totalDiffPixels / totalPixels) * 100 +"%";
         }
 
         const init = (results) => {
             console.log(results)
             loadMoreImages(results.diffTiles);
+            populateReportSummary(results);
             $("#loadMore").on('click', function (e) {
                 e.preventDefault();
                 loadMoreImages(results.diffTiles);
